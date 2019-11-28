@@ -31,9 +31,10 @@ public class DoPlayer : MonoBehaviour
         mCubeParent = GameObject.Find("Plane");
 
         mPointGrid = AStarAlgorithm.GetInsatnce.mPointGrid;
-        mStartPos = mPointGrid[0, 0];
-
+       
         InitBG();
+
+        mStartPos = mPointGrid[0, 0];
     }
 
     private void Update()
@@ -71,6 +72,8 @@ public class DoPlayer : MonoBehaviour
                 CreateCube(i, j, Color.gray);
             }
         }
+
+        AStarAlgorithm.GetInsatnce.SetWall();
     }
 
 
@@ -78,7 +81,8 @@ public class DoPlayer : MonoBehaviour
     {
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
         go.transform.SetParent(mCubeParent.transform);
-        go.transform.position = new Vector3(x, y, 0);
+        go.transform.localPosition = new Vector3(x, y, 0);
+        AStarAlgorithm.GetInsatnce.InitPoint1(x, y, x, y);
         go.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
         go.GetComponent<Renderer>().material.color = color;
 

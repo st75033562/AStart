@@ -12,7 +12,7 @@ public class Cube : MonoBehaviour
     {
         if (FindPath != null)
         {
-            FindPath((int)this.transform.position.x, (int)this.transform.position.y);
+            FindPath((int)this.transform.localPosition.x, (int)this.transform.localPosition.y);
         }
     }
 }

@@ -28,11 +28,11 @@ public class AStarAlgorithm
 
     public AStarAlgorithm()
     {
-        InitPoint();
+  //      InitPoint();
     }
 
     //在网格上设置点的信息
-    private void InitPoint()
+    public void InitPoint()
     {
         for (int i = 0; i < mGridWidth; i++)
         {
@@ -42,6 +42,43 @@ public class AStarAlgorithm
             }
         }
 
+        //设置障碍物
+        mPointGrid[4, 2].mIsObstacle = true;
+        mPointGrid[4, 3].mIsObstacle = true;
+        mPointGrid[4, 4].mIsObstacle = true;
+        mPointGrid[4, 5].mIsObstacle = true;
+        mPointGrid[4, 6].mIsObstacle = true;
+
+        //显示障碍物
+        for (int x = 0; x < mGridWidth; x++)
+        {
+            for (int y = 0; y < mGridHeight; y++)
+            {
+                if (mPointGrid[x, y].mIsObstacle)
+                {
+                    CreatePath(x, y, Color.blue);
+                }
+            }
+        }
+    }
+
+    public void InitPoint1(int i, int j, int pointX, int pointY)
+    {
+        //for (int i = 0; i < mGridWidth; i++)
+        //{
+        //    for (int j = 0; j < mGridHeight; j++)
+        //    {
+        //        mPointGrid[i, j] = new AStarPoint(i, j);
+        //    }
+        //}
+
+        mPointGrid[i, j] = new AStarPoint(pointX, pointY);
+
+       
+    }
+
+    public void SetWall()
+    {
         //设置障碍物
         mPointGrid[4, 2].mIsObstacle = true;
         mPointGrid[4, 3].mIsObstacle = true;
@@ -173,9 +210,10 @@ public class AStarAlgorithm
     private void CreatePath(int x, int y, Color color)
     {
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.transform.position = new Vector3(x, y, 0);
-        go.GetComponent<Renderer>().material.color = color;
         go.transform.SetParent(GameObject.Find("Plane").transform);
+        go.transform.localPosition = new Vector3(x, y, 0);
+        go.GetComponent<Renderer>().material.color = color;
+        
 
         if (mPointGrid[x, y].mGameObject != null)
         {
