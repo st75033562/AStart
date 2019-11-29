@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AStarAlgorithm
 {
-    private const int mGridWidth = 20;
-    private const int mGridHeight = 10;
+    private const int mGridWidth = 80;
+    private const int mGridHeight = 70;
 
     //使用二维数组存储点网格    
     public AStarPoint[,] mPointGrid = new AStarPoint[mGridWidth, mGridHeight];
@@ -97,6 +97,12 @@ public class AStarAlgorithm
                 }
             }
         }
+    }
+
+    public void SetWall1(int i, int j)
+    {
+        mPointGrid[i, j].mIsObstacle = true;
+        CreatePath(i, j, Color.blue);
     }
 
     public void ClearGrid()

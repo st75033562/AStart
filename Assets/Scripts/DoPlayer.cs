@@ -10,8 +10,8 @@ public class DoPlayer : MonoBehaviour
     private List<AStarPoint> mPathPosList;
 
     //网格大小
-    private const int mGridWidth = 20;
-    private const int mGridHeight = 10;
+    private const int mGridWidth = 80;
+    private const int mGridHeight = 70;
 
     private AStarPoint[,] mPointGrid;
 
@@ -86,7 +86,14 @@ public class DoPlayer : MonoBehaviour
         go.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
         go.GetComponent<Renderer>().material.color = color;
 
-        go.AddComponent<Cube>().FindPath = FindPath;
+        var cube = go.AddComponent<Cube>();
+        cube.X = x;
+        cube.Y = y;
+        cube.wall = (x1, y1) =>
+        {
+            AStarAlgorithm.GetInsatnce.SetWall1(x1, y1);
+        };
+        cube.FindPath = FindPath;
     }
 
     public void FindPath(int mTargetX, int mTargetY)

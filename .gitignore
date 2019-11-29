@@ -1,1 +1,6 @@
 /Library*
+/Temp/
+.vs/*
+.vs/AStart/v15/Server/sqlite3/storage.ide-shm
+.vs/AStart/v15/*
+.vs/AStart/v15/Server/sqlite3/storage.ide
