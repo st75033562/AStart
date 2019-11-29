@@ -72,8 +72,6 @@ public class DoPlayer : MonoBehaviour
                 CreateCube(i, j, Color.gray);
             }
         }
-
-        AStarAlgorithm.GetInsatnce.SetWall();
     }
 
 
@@ -84,7 +82,8 @@ public class DoPlayer : MonoBehaviour
         go.transform.localPosition = new Vector3(x, y, 0);
         AStarAlgorithm.GetInsatnce.InitPoint1(x, y, x, y);
         go.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-        go.GetComponent<Renderer>().material.color = color;
+        Destroy(go.GetComponent<Renderer>());
+       // go.GetComponent<Renderer>().material.color = color;
 
         var cube = go.AddComponent<Cube>();
         cube.X = x;

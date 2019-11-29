@@ -77,32 +77,10 @@ public class AStarAlgorithm
        
     }
 
-    public void SetWall()
-    {
-        //设置障碍物
-        mPointGrid[4, 2].mIsObstacle = true;
-        mPointGrid[4, 3].mIsObstacle = true;
-        mPointGrid[4, 4].mIsObstacle = true;
-        mPointGrid[4, 5].mIsObstacle = true;
-        mPointGrid[4, 6].mIsObstacle = true;
-
-        //显示障碍物
-        for (int x = 0; x < mGridWidth; x++)
-        {
-            for (int y = 0; y < mGridHeight; y++)
-            {
-                if (mPointGrid[x, y].mIsObstacle)
-                {
-                    CreatePath(x, y, Color.blue);
-                }
-            }
-        }
-    }
-
     public void SetWall1(int i, int j)
     {
         mPointGrid[i, j].mIsObstacle = true;
-        CreatePath(i, j, Color.blue);
+       // CreatePath(i, j, Color.blue);
     }
 
     public void ClearGrid()
@@ -217,6 +195,7 @@ public class AStarAlgorithm
     {
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
         go.transform.SetParent(GameObject.Find("Plane").transform);
+        go.name = "aasdas";
         go.transform.localPosition = new Vector3(x, y, 0);
         go.GetComponent<Renderer>().material.color = color;
         
