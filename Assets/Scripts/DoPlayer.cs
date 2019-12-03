@@ -16,6 +16,7 @@ public class DoPlayer : MonoBehaviour
     private AStarPoint[,] mPointGrid;
 
     private AStarPoint mStartPos;
+    private bool isStartPoint;
     private AStarPoint mEndPos { get; set; }
 
     //每一秒发生位移
@@ -35,6 +36,7 @@ public class DoPlayer : MonoBehaviour
         InitBG();
 
         mStartPos = mPointGrid[0, 0];
+        mEndPos = mPointGrid[10, 10];
     }
 
     private void Update()
@@ -95,6 +97,11 @@ public class DoPlayer : MonoBehaviour
         cube.FindPath = FindPath;
     }
 
+    public void OnClickSetPoint(bool isStartPoint)
+    {
+        this.isStartPoint = isStartPoint;
+    }
+
     public void FindPath(int mTargetX, int mTargetY)
     {
         if (mPathPosList != null)
@@ -104,9 +111,16 @@ public class DoPlayer : MonoBehaviour
         AStarAlgorithm.GetInsatnce.ClearGrid();
 
         //网格点对象重新刷新了  需要使用网格来索引到点 mPathPosList存储的点是之前的AStarPoint
-        this.mEndPos = mPointGrid[mTargetX, mTargetY];
-        this.mStartPos = mPointGrid[mStartPos.mPositionX, mStartPos.mPositionY];
-
+        if (isStartPoint)
+        {
+            this.mStartPos = mPointGrid[mTargetX, mTargetY];
+            this.mEndPos = mPointGrid[mEndPos.mPositionX, mEndPos.mPositionY];
+        }
+        else
+        {
+            this.mEndPos = mPointGrid[mTargetX, mTargetY];
+            this.mStartPos = mPointGrid[mStartPos.mPositionX, mStartPos.mPositionY];
+        }
         mPathPosList = AStarAlgorithm.GetInsatnce.FindPath(this.mStartPos, mEndPos);
     }
 }
